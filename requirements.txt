@@ -1,0 +1,5 @@
+tweepy==3.6.0
+spacy==2.0.12
+pandas==0.22.0
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.0.0/en_core_web_sm-2.0.0.tar.gz
+matplotlib==2.1.2
