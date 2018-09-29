@@ -5,18 +5,21 @@ import time
 import spacy
 import en_core_web_sm
 import matplotlib
+from boto.s3.connection import S3Connection
+
 
 matplotlib.use("Agg")
 
 
 # Uncomment the following to test the script locally:
-# from config import consumer_key, consumer_secret, access_token, access_token_secret
+#from config import consumer_key, consumer_secret, access_token, access_token_secret
 
 # Get config variable from environment variables
-consumer_key = os.environ.get("consumer_key")
-consumer_secret = os.environ.get("consumer_secret")
-access_token = os.environ.get("access_token")
-access_token_secret = os.environ.get("access_token_secret")
+s3 = S3Connection(os.environ['consumer_secret'], os.environ['consumer_key'], os.environ['access_token_secret'], os.environ['access_token'])
+consumer_key = s3[0]
+consumer_secret = s3[1]
+access_token = s3[2]
+access_token_secret = s3[4]
 
 # Setup Tweepy API Authentication
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -32,7 +35,7 @@ def update_twitter():
     # Create dictionary to hold text and label entities
     tweet_dict = {"text": [], "label": []}
 
-    mentions = api.search(q="@Sibyl_Servant Analyze:")
+    mentions = api.search(q="@TraderData Analyze:")
     print(mentions)
     words = []
     try:
